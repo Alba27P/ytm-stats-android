@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>YTM Stats</title>
+  <link rel="icon" href="icons/icon32.png">
+  <link rel="stylesheet" href="stats.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <img src="icons/icon48.png" alt="">
+      <div>
+        <h1>YTM Stats</h1>
+        <p class="muted" id="subtitle">Loading…</p>
+      </div>
+    </div>
+    <div class="controls needs-data">
+      <select id="range" aria-label="Time range"></select>
+      <div class="seg" id="metric" role="group" aria-label="Rank by">
+        <button data-m="time">Time</button>
+        <button data-m="plays">Plays</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="appbar">
+      <div class="panel warn" id="access" hidden>
+        <h2>One step to start tracking</h2>
+        <p>Give YTM Stats <b>notification access</b> so it can see what YouTube Music is playing. It only reads the song info and never your notifications' contents.</p>
+        <div class="btnrow"><button class="primary" id="grant">Grant access</button><button id="appInfo">Open app info</button></div>
+        <p class="muted small" style="margin-top:10px">Switch greyed out? On Android 13+, open <b>App info → ⋮ (top right) → Allow restricted settings</b>, then try again.</p>
+      </div>
+      <div class="panel warn" id="noYtm" hidden><p>The YouTube Music app isn't installed on this phone. Install it from the Play Store to start tracking.</p></div>
+      <div class="nowrow">
+        <div id="np"></div>
+        <label class="switch"><input type="checkbox" id="trackToggle"><span></span>Tracking</label>
+      </div>
+      <div id="quick"></div>
+    </section>
+    <section class="panel empty" id="empty" hidden>
+      <h2>No listening data yet</h2>
+      <p>Open <b>music.youtube.com</b> and play something. Sessions are saved automatically every few seconds — come back here and your stats will appear (this page updates live).</p>
+      <p class="muted">Already have history? Import a backup or your Google Takeout YouTube history below.</p>
+    </section>
+
+    <div id="content" class="needs-data stack">
+      <section class="cards" id="cards"></section>
+
+      <section class="panel" id="profilePanel">
+        <h2>Your listening profile</h2>
+        <div id="profile"></div>
+      </section>
+
+      <section class="panel">
+        <div class="ph"><h2>Listening activity</h2><span class="muted" id="actNote"></span></div>
+        <div id="activity"></div>
+      </section>
+
+      <section class="panel">
+        <div class="ph"><h2>Calendar</h2><span class="muted" id="calNote"></span></div>
+        <div id="calendar"></div>
+      </section>
+
+      <div class="grid2">
+        <section class="panel"><div class="ph"><h2>Hour of day</h2><span class="muted" id="hourNote"></span></div><div id="hours"></div></section>
+        <section class="panel"><div class="ph"><h2>Day of week</h2><span class="muted" id="wdNote"></span></div><div id="weekdays"></div></section>
+      </div>
+
+      <section class="panel">
+        <div class="ph"><h2>When you listen</h2><span class="muted">weekday × hour</span></div>
+        <div id="hourWeek"></div>
+      </section>
+
+      <div class="grid3">
+        <section class="panel"><h2>Top artists</h2><ol class="top artist" id="topArtists"></ol></section>
+        <section class="panel"><h2>Top tracks</h2><ol class="top" id="topTracks"></ol></section>
+        <section class="panel"><h2>Top albums</h2><ol class="top" id="topAlbums"></ol></section>
+      </div>
+
+      <div class="grid2">
+        <section class="panel"><h2>Discovery</h2><div id="discovery"></div></section>
+        <section class="panel"><h2>Records</h2><div id="records"></div></section>
+      </div>
+
+      <section class="panel">
+        <h2>Month by month</h2>
+        <div class="scroll-x" id="monthly"></div>
+      </section>
+
+      <section class="panel">
+        <div class="ph"><h2>History</h2><input id="histSearch" type="search" placeholder="Search tracks, artists, albums…"></div>
+        <div class="scroll-x" id="history"></div>
+      </section>
+    </div>
+
+    <section class="panel">
+      <h2>Your data</h2>
+      <p class="muted" id="dataNote">Everything is stored locally in your browser. Export regularly if you want a backup — removing the extension deletes its data.</p>
+      <div class="btnrow">
+        <button id="exportJson">Export backup (JSON)</button>
+        <button id="exportCsv">Export CSV</button>
+        <label class="btn">Import backup / Takeout<input type="file" id="importFile" accept=".json,application/json" hidden></label>
+        <button id="clearData" class="danger">Delete all data</button>
+      </div>
+      <p class="muted small" id="dataMsg"></p>
+      <details class="small muted">
+        <summary>Backfill from Google Takeout</summary>
+        <p>At takeout.google.com select <b>YouTube and YouTube Music → history</b>, set the history format to <b>JSON</b>, then import <code>watch-history.json</code> here. Only YouTube Music entries are imported. Takeout doesn't record how long you listened, so each entry is counted as a 3-minute play (marked "estimated" in History).</p>
+      </details>
+    </section>
+  </main>
+
+  <dialog id="detail"></dialog>
+  <div id="toast" hidden></div>
+
+  <script src="android-shim.js"></script>
+  <script src="common.js"></script>
+  <script src="stats.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

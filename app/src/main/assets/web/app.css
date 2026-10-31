@@ -1,0 +1,54 @@
+/* Android / phone adjustments layered on top of stats.css */
+html { -webkit-tap-highlight-color: transparent; }
+body { overscroll-behavior-y: contain; }
+header.top { padding: 10px 14px; flex-wrap: wrap; gap: 10px; }
+header.top .controls { width: 100%; }
+header.top .controls select { flex: 1; }
+main { padding: 14px 12px 80px; gap: 14px; }
+.panel { padding: 14px; border-radius: 14px; }
+.stack { gap: 14px; }
+
+.appbar { display: flex; flex-direction: column; gap: 10px; }
+.warn { border-color: #6b2a35; background: linear-gradient(135deg, #2a1015, #151517); }
+.warn h2 { margin-bottom: 6px; }
+.warn p { margin: 0 0 10px; }
+.warn .btnrow { margin: 0; }
+.warn button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+
+.nowrow { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; }
+#np { display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: center; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 8px; min-width: 0; }
+#np .art { width: 52px; height: 52px; border-radius: 8px; }
+#np .live { display: block; font-size: 11px; color: #ff7d97; text-transform: uppercase; letter-spacing: .06em; }
+.switch { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; color: var(--muted); }
+.switch input { display: none; }
+.switch span { position: relative; width: 44px; height: 26px; border-radius: 99px; background: #333; transition: .2s; }
+.switch span::after { content: ""; position: absolute; left: 3px; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: .2s; }
+.switch input:checked + span { background: var(--accent); }
+.switch input:checked + span::after { left: 21px; }
+
+#quick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+#quick div { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+#quick div:first-child { background: linear-gradient(135deg, var(--accent), var(--accent2)); border-color: transparent; }
+#quick span { display: block; font-size: 10px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+#quick div:first-child span, #quick div:first-child small { color: rgba(255, 255, 255, .88); }
+#quick b { font-size: 17px; font-variant-numeric: tabular-nums; }
+#quick small { display: block; font-size: 11px; color: var(--muted); }
+
+.cards { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.card { padding: 12px; }
+.card .v { font-size: 21px; }
+
+/* Wide charts scroll sideways instead of shrinking to nothing */
+#calendar { overflow-x: auto; padding-bottom: 4px; }
+#calendar .cal { min-width: 680px; }
+.hw { grid-template-columns: 28px repeat(24, 1fr); gap: 2px; }
+.hw i { height: 18px; border-radius: 3px; }
+.rec { grid-template-columns: 1fr; gap: 2px; }
+#histSearch { min-width: 0; width: 100%; }
+.tags { grid-template-columns: 1fr; }
+dialog { width: 96vw; max-height: 90vh; }
+.dlg-head { padding: 16px 16px 0; }
+.dlg-body { padding: 14px 16px 18px; }
+.dlg-head .art { width: 60px; height: 60px; }
+
+#toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); max-width: 90vw; background: #2a2a2f; color: var(--text); padding: 10px 16px; border-radius: 12px; font-size: 13px; box-shadow: 0 8px 30px rgba(0, 0, 0, .5); z-index: 50; text-align: center; }
